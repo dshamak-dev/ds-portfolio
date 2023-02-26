@@ -1,0 +1,17 @@
+@keyframes marquee {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  --marquee-duration: 20s;
+}
+
+.marquee > .marquee-content {
+  animation: marquee var(--marquee-duration) linear infinite;
+  animation-delay: 0;
+}

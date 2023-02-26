@@ -1,0 +1,12 @@
+.endless-scroller {
+  --transition-duration: 500ms;
+  --content-offset-x: 0;
+}
+
+.endless-scroller .endless-scroller-content {
+  transform: translateX(var(--content-offset-x));
+}
+
+.endless-scroller .endless-scroller-content.animated {
+  transition: transform var(--transition-duration) linear;
+}
