@@ -7,7 +7,7 @@
     "electron": false
   },
   "scripts": {
-    "prebuild": "npm run clean-build && npm run copy-base",
+    "beta-prebuild": "npm run clean-build && npm run copy-base",
     "build": "webpack --mode production",
     "start": "webpack serve --mode development",
     "clean-build": "del public",
