@@ -1,0 +1,25 @@
+stages:
+  - build
+  # - test
+
+# The Docker image that will be used to build your app
+image: node:latest
+# Functions that should be executed before the build script is run
+
+build:
+  stage: build
+  before_script:
+  - cd private && npm ci
+  - cd ../ && npm ci
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - node_modules
+      - private
+      - public
+
+test:
+  stage: test
+  script:
+    - npm run test
