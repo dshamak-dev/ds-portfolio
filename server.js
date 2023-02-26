@@ -6,7 +6,7 @@ const compression = require('compression');
 const PORT = process.env.PORT || 80;
 const app = express();
 
-const PUBLIC_FOLDER = path.resolve(__dirname, '../public');
+const PUBLIC_FOLDER = "public";
 
 const cacheTime = 86400000 * 30; // the time you want
 const robots = require('express-robots-txt');

@@ -9,14 +9,13 @@ image: node:latest
 build:
   stage: build
   before_script:
-  - cd private && npm ci
-  - cd ../ && npm ci
+  - npm ci
   script:
     - npm run build
   artifacts:
     paths:
       - node_modules
-      - private
+      - server.js
       - public
 
 test:
