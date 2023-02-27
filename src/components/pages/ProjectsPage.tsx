@@ -2,6 +2,13 @@ import { PROJECTS } from "../../constants/project.const";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { PageHead } from "../atoms/PageHead";
 import { ProjectPreview } from "../molecules/project/ProjectPreview";
+import { useDevice } from "../../hooks/useDevice";
+import classNames from "classnames";
+import { PageContentCover } from "../atoms/PageContentCover";
+import { appStore } from "../../stores/AppStore";
+import { THEME_TYPE } from "../../constants/themes.const";
+import { useTheme } from "../../hooks/useTheme";
+import { observer } from "mobx-react";
 
 interface ProjectsPageProps {}
 
@@ -22,7 +29,9 @@ const getDirectionIndex = (current: number, direction: number) => {
   return nextIndex;
 };
 
-export const ProjectsPage: FC<ProjectsPageProps> = () => {
+export const ProjectsPage: FC<ProjectsPageProps> = observer(() => {
+  const { mobile } = useDevice();
+  const { isDarkTheme } = useTheme();
   const [activeProjectIndex, setActiveProjectIndex] = useState(0);
   const projectList = useMemo(() => {
     return PROJECTS.map((it: any, ind: number) => {
@@ -37,6 +46,14 @@ export const ProjectsPage: FC<ProjectsPageProps> = () => {
     const num = activeProjectIndex + 1;
     return `${num < 10 ? "0" : ""}${num}`;
   }, [activeProjectIndex]);
+  const activeProject = useMemo(
+    () => PROJECTS[activeProjectIndex],
+    [activeProjectIndex]
+  );
+
+  useEffect(() => {
+    appStore.setPageTheme(activeProject.theme as THEME_TYPE);
+  }, [activeProject]);
 
   const handleScroll = (direction: number) => {
     setActiveProjectIndex((current) => getDirectionIndex(current, direction));
@@ -81,25 +98,73 @@ export const ProjectsPage: FC<ProjectsPageProps> = () => {
 
       handleScroll(event.deltaY > 0 ? 1 : -1);
     });
+
+    let touchPoints: any = [];
+
+    document.addEventListener('touchmove', (event) => {
+      touchPoints.push(event);
+    });
+    document.addEventListener('touchend', (event) => {
+      if (touchPoints == null || touchPoints.length === 0) {
+        return;
+      }
+
+      const first = touchPoints[0].touches[0];
+      const last = touchPoints[touchPoints.length - 1].touches[0];
+
+      const directionX = first.pageX - last.pageX;
+      const directionY = first.pageY - last.pageY;
+      let direction = 0;
+
+      if (directionX !== 0) {
+        direction = directionX > 0 ? 1 : -1;
+      } else if (directionY !== 0) {
+        direction = directionY > 0 ? 1 : -1;
+      }
+
+      handleScroll(direction);
+      touchPoints = [];
+    });
   }, []);
 
   return (
     <>
       <PageHead title="Projects" />
-      <main className="h-screen w-screen overflow-hidden p-[3rem] grid grid-rows-[1fr_auto]">
-        <section className="h-full flex flex-col justify-between grid grid-cols-[1fr_3fr] gap-[2rem] items-center">
+      <PageContentCover
+        fluid={mobile}
+        className={classNames(
+          "transition-all duration-500",
+          "h-screen w-screen overflow-hidden grid grid-rows-[1fr_auto]",
+          isDarkTheme ? "text-white bg-blue_dark" : "text-black bg-white"
+        )}
+      >
+        <section
+          className={classNames(
+            "relative h-full w-full",
+            mobile
+              ? "flex items-center"
+              : "grid grid-cols-[1fr_3fr] gap-[2rem] items-center"
+          )}
+        >
           <div
             id="project-info-content"
-            className="relative z-10 flex items-center"
+            className={classNames("relative z-10 flex items-center", {
+              "px-[1rem]": mobile,
+            })}
           >
-            <div className="">
-              <h2 className="text-[2.4rem] font-semibold">Lorem Ipsum</h2>
-              <h3 className="text-[1.3rem] text-grey_light">Ipsun dolor est</h3>
+            <div className="drop-shadow-md">
+              <h2 className={classNames("text-[2.4rem] font-semibold uppercase")}>
+                Lorem Ipsum
+              </h2>
+              <h3 className={classNames("text-[1.3rem]")}>Ipsun dolor est</h3>
             </div>
           </div>
           <div
             id="project-preview-content"
-            className="relative z-0 h-full items-center"
+            className={classNames(
+              "z-0 w-full h-full items-center",
+              mobile ? "absolute top-0 left-0" : "relative"
+            )}
           >
             {projectList.map((it: any, ind: number) => {
               return (
@@ -110,12 +175,15 @@ export const ProjectsPage: FC<ProjectsPageProps> = () => {
         </section>
         <section
           id="project-additional"
-          className="relative z-10 flex justify-between text-[1.2rem]"
+          className={classNames(
+            "w-full z-10 flex justify-between text-[1.2rem]",
+            mobile ? "absolute bottom-[3rem] px-[1rem]" : "relative"
+          )}
         >
           <span>dshamak.com</span>
           <span>{projectNum}</span>
         </section>
-      </main>
+      </PageContentCover>
     </>
   );
-};
+});

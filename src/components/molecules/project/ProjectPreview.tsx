@@ -27,9 +27,9 @@ export const ProjectPreview: FC<IComponent> = ({
     let translate = "0vw, 0vh, 0";
 
     if (previous) {
-      translate = "-100vw, -100vh, 0";
+      translate = "-120vw, -120vh, 0";
     } else if (next) {
-      translate = "100vw, 100vh, 0";
+      translate = "120vw, 120vh, 0";
     }
 
     return {

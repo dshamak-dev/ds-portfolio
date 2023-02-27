@@ -1,0 +1,1 @@
+export type THEME_TYPE = 'dark' | 'light';
