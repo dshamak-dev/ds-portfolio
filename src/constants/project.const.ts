@@ -50,6 +50,6 @@ export const PROJECTS: IProject[] = [
         text: "@makeabag",
       },
     ],
-    theme: "light",
+    theme: "dark",
   },
 ];

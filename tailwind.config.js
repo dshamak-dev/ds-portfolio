@@ -1,13 +1,11 @@
 module.exports = {
-  purge: {
-    content: [
-      "./public/**/*.html",
-      "./src/**/*.html",
-      "./src/**/*.tsx",
-      "./src/**/*.css",
-    ],
-  },
-  content: ["./src/**/*.{js,ts,tsx}"],
+  content: [
+    "./public/**/*.html",
+    "./src/**/*.html",
+    "./src/**/*.tsx",
+    "./src/**/*.css",
+    "./src/**/*.{js,ts,tsx}",
+  ],
   theme: {
     extend: {
       colors: {

@@ -64,9 +64,9 @@ export const ProjectPreview: FC<IComponent> = ({
           className,
           "absolute top-0 left-0 w-full h-full transition-all linear duration-[500ms] bg-no-repeat bg-cover",
           {
-            "bg-center": active,
-            "bg-top-left": next,
-            "bg-right-bottom": previous,
+            "z-0 bg-center opacity-100": active,
+            "z-10 bg-top-left opacity-0": next,
+            "z-0 bg-right-bottom opacity-0": previous,
           }
         )}
       ></a>

@@ -135,18 +135,14 @@ export const ProjectsPage: FC<ProjectsPageProps> = observer(() => {
   }, []);
 
   return (
-    <div
-      className={classNames(
-        "page",
-        isDarkTheme ? "text-white bg-blue_dark" : "text-black bg-white"
-      )}
-    >
+    <>
       <PageHead title="Projects" />
       <PageContentCover
         fluid={mobile}
         className={classNames(
-          "transition-all duration-500",
-          "h-screen w-screen overflow-hidden grid grid-rows-[1fr_auto]"
+          "bg-pattern transition-all duration-500",
+          "h-screen w-screen overflow-hidden grid grid-rows-[1fr_auto]",
+          isDarkTheme ? "text-white bg-blue_dark" : "text-black bg-white"
         )}
       >
         <section
@@ -207,6 +203,6 @@ export const ProjectsPage: FC<ProjectsPageProps> = observer(() => {
           <span>{projectNum}</span>
         </section>
       </PageContentCover>
-    </div>
+    </>
   );
 });
