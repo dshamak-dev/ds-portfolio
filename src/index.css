@@ -8,6 +8,9 @@ html {
 
 html, body {
   @apply bg-blue_dark text-white;
+}
+
+.page, .bg-pattern {
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAPCAYAAAAVk7TYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAArSURBVHgB7dAhFQAACMRQuhH66mGIMAxvX02vknSt637MjQg3ItyIcCNhAM+0bEkvEsthAAAAAElFTkSuQmCC);
 }
 

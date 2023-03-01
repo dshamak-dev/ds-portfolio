@@ -11,7 +11,7 @@ build:
   before_script:
   - npm ci
   script:
-    - npm run build
+    - npm run prod-build
   artifacts:
     paths:
       - node_modules

@@ -6,13 +6,20 @@
   "browser": {
     "electron": false
   },
+  "simple-webp-converter": {
+    "src": "public/assets/uploads/**/*.{png,jpg}"
+  },
   "scripts": {
-    "beta-prebuild": "npm run clean-build && npm run copy-base",
+    "prod-build": "npm run clean-build && npm run copy-files && build",
     "build": "webpack --mode production",
     "dev": "webpack serve --mode development",
     "start": "node server",
-    "clean-build": "del public",
-    "copy-base": "mkdir -p public && cp src/index.html public/ && cp /assets/* public/assets/"
+    "clean-build": "rm public",
+    "copy-files": "mkdir -p public && npm run copy-index && npm run copy-assets && npm run copy-uploads",
+    "copy-index": "cp src/index.html public/",
+    "copy-assets": "cp /assets/* public/assets/",
+    "copy-uploads": "mkdir -p public/assets/uploads && cp -r uploads/* public/assets/uploads/ && npm run generate-webp && rm public/assets/uploads/*.jpg && rm public/assets/uploads/**/*.jpg",
+    "generate-webp": "simple-webp-converter"
   },
   "author": "",
   "license": "ISC",
@@ -33,6 +40,7 @@
     "postcss": "8.4.21",
     "postcss-loader": "7.0.2",
     "postcss-preset-env": "8.0.1",
+    "simple-webp-converter": "^1.0.3",
     "style-loader": "3.3.1",
     "tailwindcss": "3.2.7",
     "ts-loader": "9.4.2",

@@ -17,8 +17,17 @@ export const ProjectPreview: FC<IComponent> = ({
   className,
   type,
   previewURL,
+  links = [],
   ...other
 }) => {
+  const targetLink = useMemo(() => {
+    if (links.length === 0) {
+      return null;
+    }
+
+    return links[0].url;
+  }, [links]);
+
   if (!active && !next && !previous) {
     return null;
   }
@@ -39,14 +48,15 @@ export const ProjectPreview: FC<IComponent> = ({
 
   return (
     <div
-      {...other}
       style={style}
       className={classNames(
         className,
         "project-preview absolute top-0 left-0 w-full h-full transition-all duration-[1s]"
       )}
     >
-      <div
+      <a
+        href={targetLink}
+        target="_blank"
         style={{
           backgroundImage: previewURL != null ? `url(${previewURL})` : null,
         }}
@@ -59,7 +69,7 @@ export const ProjectPreview: FC<IComponent> = ({
             "bg-right-bottom": previous,
           }
         )}
-      ></div>
+      ></a>
     </div>
   );
 };

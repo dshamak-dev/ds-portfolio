@@ -50,6 +50,13 @@ export const ProjectsPage: FC<ProjectsPageProps> = observer(() => {
     () => PROJECTS[activeProjectIndex],
     [activeProjectIndex]
   );
+  const targetLink = useMemo(() => {
+    if (activeProject.links.length === 0) {
+      return null;
+    }
+
+    return activeProject.links[0];
+  }, [activeProject]);
 
   useEffect(() => {
     appStore.setPageTheme(activeProject.theme as THEME_TYPE);
@@ -101,10 +108,10 @@ export const ProjectsPage: FC<ProjectsPageProps> = observer(() => {
 
     let touchPoints: any = [];
 
-    document.addEventListener('touchmove', (event) => {
+    document.addEventListener("touchmove", (event) => {
       touchPoints.push(event);
     });
-    document.addEventListener('touchend', (event) => {
+    document.addEventListener("touchend", (event) => {
       if (touchPoints == null || touchPoints.length === 0) {
         return;
       }
@@ -128,14 +135,18 @@ export const ProjectsPage: FC<ProjectsPageProps> = observer(() => {
   }, []);
 
   return (
-    <>
+    <div
+      className={classNames(
+        "page",
+        isDarkTheme ? "text-white bg-blue_dark" : "text-black bg-white"
+      )}
+    >
       <PageHead title="Projects" />
       <PageContentCover
         fluid={mobile}
         className={classNames(
           "transition-all duration-500",
-          "h-screen w-screen overflow-hidden grid grid-rows-[1fr_auto]",
-          isDarkTheme ? "text-white bg-blue_dark" : "text-black bg-white"
+          "h-screen w-screen overflow-hidden grid grid-rows-[1fr_auto]"
         )}
       >
         <section
@@ -153,16 +164,22 @@ export const ProjectsPage: FC<ProjectsPageProps> = observer(() => {
             })}
           >
             <div className="drop-shadow-md">
-              <h2 className={classNames("text-[2.4rem] font-semibold uppercase")}>
-                Lorem Ipsum
+              <h2
+                className={classNames("text-[2.4rem] font-semibold uppercase")}
+              >
+                {activeProject.title}
               </h2>
-              <h3 className={classNames("text-[1.3rem]")}>Ipsun dolor est</h3>
+              {activeProject.subtitle != null && (
+                <h3 className={classNames("text-[1.3rem]")}>
+                  {activeProject.subtitle}
+                </h3>
+              )}
             </div>
           </div>
           <div
             id="project-preview-content"
             className={classNames(
-              "z-0 w-full h-full items-center",
+              "block z-0 w-full h-full items-center",
               mobile ? "absolute top-0 left-0" : "relative"
             )}
           >
@@ -180,10 +197,16 @@ export const ProjectsPage: FC<ProjectsPageProps> = observer(() => {
             mobile ? "absolute bottom-[3rem] px-[1rem]" : "relative"
           )}
         >
-          <span>dshamak.com</span>
+          {targetLink != null ? (
+            <a href={targetLink.url} target="_blank" className="hover:underline">
+              {targetLink.text}
+            </a>
+          ) : (
+            <span></span>
+          )}
           <span>{projectNum}</span>
         </section>
       </PageContentCover>
-    </>
+    </div>
   );
 });
