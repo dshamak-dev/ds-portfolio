@@ -17,8 +17,8 @@
     "clean-build": "rm -r public",
     "copy-files": "mkdir -p public && npm run copy-index && npm run copy-assets && npm run copy-uploads",
     "copy-index": "cp src/index.html public/",
-    "copy-assets": "mkdir -p public/assets/uploads && cp assets/* public/assets/",
-    "copy-uploads": "mkdir -p public/assets/uploads && cp -r uploads/* public/assets/uploads/ && npm run generate-webp && rm public/assets/uploads/*.jpg && rm public/assets/uploads/*.png",
+    "copy-assets": "cp -R assets public",
+    "copy-uploads": "npm run generate-webp && rm public/assets/uploads/*.jpg && rm public/assets/uploads/*.png",
     "generate-webp": "simple-webp-converter"
   },
   "author": "",
