@@ -14,7 +14,7 @@
     "build": "webpack --mode production",
     "dev": "webpack serve --mode development",
     "start": "node server",
-    "clean-build": "rm -r public",
+    "clean-build": "rm -f public",
     "copy-files": "mkdir -p public && npm run copy-index && npm run copy-assets && npm run copy-uploads",
     "copy-index": "cp src/index.html public/",
     "copy-assets": "cp -R assets public",
