@@ -43,4 +43,11 @@ module.exports = {
   stats: {
     children: true,
   },
+  optimization: {
+      usedExports: false,
+      minimize: true,
+      splitChunks: {
+        chunks: 'async',
+      },
+    },
 };

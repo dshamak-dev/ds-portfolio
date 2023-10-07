@@ -3,16 +3,18 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const compression = require('compression');
 
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 88;
 const app = express();
 
 const PUBLIC_FOLDER = "public";
 
-const cacheTime = 86400000 * 30; // the time you want
+const cacheTime = 60 * 60 * 24 * 365;
 const robots = require('express-robots-txt');
 
 // Compress all HTTP responses
 app.use(compression());
+
+app.use(cors({ origin: ['http://localhost:3003'] }));
 
 app.use(robots({
   UserAgent: '*',
