@@ -1,0 +1,8 @@
+user-agent: *
+disallow: /uploads/
+
+User-agent: Googlebot
+Disallow: /uploads/
+
+User-agent: Mediapartners-Google
+Disallow:

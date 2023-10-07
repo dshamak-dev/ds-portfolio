@@ -1,26 +1,17 @@
-import React from "react";
+import React, { lazy } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
-  Link,
-  redirect,
 } from "react-router-dom";
-import { AboutPage } from "../pages/AboutPage";
-import { ProjectsPage } from "../pages/ProjectsPage";
+
+const LandingPage = lazy(() =>
+  import('src/namespaces/landing/components/LandingPage').then((module) => ({ default: module.LandingPage }))
+);
 
 const ROUTER = createBrowserRouter([
   {
-    path: "projects",
-    element: <ProjectsPage />,
-  },
-  {
-    path: "about",
-    element: <AboutPage />,
-  },
-  {
     path: "/",
-    element: <ProjectsPage />,
+    element: <LandingPage />,
   },
 ]);
 

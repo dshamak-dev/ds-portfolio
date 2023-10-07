@@ -1,7 +1,15 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+         "*",
+         "./*",
+         "src/*"
+      ]
+    },
     "outDir": "./public/",
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "module": "esnext",
     "target": "es5",
     "jsx": "react",

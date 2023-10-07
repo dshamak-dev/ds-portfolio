@@ -4,7 +4,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   entry: "./src/index.js",
   output: {
-    filename: "main.js",
+    chunkFilename: "[name].[contenthash].js",
+    filename: "[name].[contenthash].js",
+    assetModuleFilename: "[name].[contenthash][ext][query]",
+    asyncChunks: true,
     path: path.resolve(__dirname, "public"),
   },
   devServer: {
@@ -38,16 +41,20 @@ module.exports = {
     ],
   },
   resolve: {
+    alias: {
+      src: "/src",
+    },
+    modules: [path.resolve("./node_modules"), path.resolve("./src")],
     extensions: ["*", ".js", ".ts", ".tsx"],
   },
   stats: {
     children: true,
   },
   optimization: {
-      usedExports: false,
-      minimize: true,
-      splitChunks: {
-        chunks: 'async',
-      },
+    usedExports: false,
+    minimize: true,
+    splitChunks: {
+      chunks: "async",
     },
+  },
 };

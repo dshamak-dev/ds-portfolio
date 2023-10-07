@@ -3,17 +3,43 @@
 @tailwind utilities;
 
 html {
-  font-size: 20px;
-}
-
-html, body {
-  @apply bg-blue_dark text-white;
-}
-
-.page, .bg-pattern {
-  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAPCAYAAAAVk7TYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAArSURBVHgB7dAhFQAACMRQuhH66mGIMAxvX02vknSt637MjQg3ItyIcCNhAM+0bEkvEsthAAAAAElFTkSuQmCC);
+  font-family: 'Inter', sans-serif;
+  font-size: max(calc(1.5625vw), 20px);
+  @apply bg-grey_dark text-white min-h-screen scroll-smooth;
 }
 
 #root {
   @apply relative;
+
+  & h1 {
+    @apply leading-normal text-[2rem]  md:text-[3.6rem];
+  }
+
+  & h2 {
+    @apply leading-normal text-[1.6rem] md:text-[2.8rem];
+  }
+
+  & h3 {
+    @apply leading-normal text-[1.2rem] md:text-[2rem];
+  }
+
+  & p {
+    @apply leading-tight text-base;
+  }
+
+  & .button,
+  & button {
+    @apply px-8 py-3 bg-highlight text-black;
+  }
+
+  & .content-separator {
+    &:before,
+    &:after {
+      content: "";
+      display: block;
+      height: 2px;
+
+      @apply w-full my-10 bg-grey_light;
+    }
+  }
 }

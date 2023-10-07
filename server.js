@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const PORT = process.env.PORT || 88;
 const app = express();
@@ -16,12 +17,8 @@ app.use(compression());
 
 app.use(cors({ origin: ['http://localhost:3003'] }));
 
-app.use(robots({
-  UserAgent: '*',
-  Disallow: '/',
-  CrawlDelay: '5',
-  Sitemap: 'https://dshamak.com',
-}));
+const robotsFilePath = path.join(__dirname, PUBLIC_FOLDER, '/robots.txt');
+app.use(robots(robotsFilePath));
 
 app.use(express.static(PUBLIC_FOLDER, {
   maxAge: cacheTime,
