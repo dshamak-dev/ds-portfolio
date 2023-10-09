@@ -3,9 +3,21 @@
 @tailwind utilities;
 
 html {
-  font-family: 'Inter', sans-serif;
-  font-size: max(calc(1.5625vw), 20px);
+  --max-font-size: 20px;
+
+  font-family: "Inter", sans-serif;
+  font-size: max(calc(1.5625vw), var(--max-font-size));
   @apply bg-grey_dark text-white min-h-screen scroll-smooth;
+}
+
+body {
+  @apply bg-grey_dark;
+}
+
+@media (max-width: 768px) {
+  html {
+    --max-font-size: 18px;
+  }
 }
 
 #root {
@@ -20,7 +32,7 @@ html {
   }
 
   & h3 {
-    @apply leading-normal text-[1.2rem] md:text-[2rem];
+    @apply leading-normal text-[1.4rem] md:text-[2rem];
   }
 
   & p {
@@ -32,9 +44,19 @@ html {
     @apply px-8 py-3 bg-highlight text-black;
   }
 
+  & .custom-list li:before {
+    display: inline-block;
+    content: "";
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 100%;
+    margin-right: 0.5rem;
+
+    @apply border border-highlight;
+  }
+
   & .content-separator {
-    &:before,
-    &:after {
+    &:before {
       content: "";
       display: block;
       height: 2px;

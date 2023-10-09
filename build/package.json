@@ -1,0 +1,21 @@
+{
+  "name": "shamak.dmirty",
+  "version": "1.0.0",
+  "description": "Portfolio of React developer | JavaScript | TypeScript | Front-End | Unity 3D",
+  "main": "index.js",
+  "browser": {
+    "electron": false
+  },
+  "scripts": {
+    "start": "npm i && node ./server.js"
+  },
+  "author": "Dmitry Shamak",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-robots-txt": "^1.0.0"
+  }
+}

@@ -1,37 +1,93 @@
-export const landingWorks = Array(9)
-  .fill(0)
-  .map((_, ind) => ({
-    url: `/#work-${ind}`,
-    text: `work #${ind + 1}`,
-  }));
+export const landingWorks = [
+  {
+    url: `https://www.shmat.art`,
+    text: "Shmat Art",
+    imageUrl: "/uploads/works_sprite.webp",
+    spritePosition: [1, 2],
+    spriteScale: [3, 3],
+    className: null,
+  },
+  {
+    url: `https://www.sideways6.com/solution/idea-and-innovation-management-software`,
+    text: "Sideways6 Teams App",
+    imageUrl: "/uploads/works_sprite.webp",
+    spritePosition: [0, 0],
+    spriteScale: [3, 3],
+    className: null,
+  },
+  {
+    url: `https://ableapp.com/about-us`,
+    text: "Ruby Labs",
+    imageUrl: "/uploads/works_sprite.webp",
+    spritePosition: [1, 0],
+    spriteScale: [3, 3],
+    className: null,
+  },
+  {
+    url: `https://www.instagram.com/makeabag.official/?hl=en`,
+    text: "Make A Bag",
+    imageUrl: "/uploads/works_sprite.webp",
+    spritePosition: [2, 0],
+    spriteScale: [3, 3],
+    className: null,
+  },
+  {
+    url: `https://www.fabl.co/`,
+    text: "Fabl",
+    imageUrl: "/uploads/works_sprite.webp",
+    spritePosition: [0, 1],
+    spriteScale: [3, 3],
+    className: null,
+  },
+  {
+    url: `https://www.adformhelp.com/hc/en-us/categories/9738365991697-Data-Management-Platform`,
+    text: "Adform",
+    imageUrl: "/uploads/works_sprite.webp",
+    spritePosition: [1, 1],
+    spriteScale: [3, 3],
+    className: null,
+  },
+  {
+    url: `https://itechartgroup.by/`,
+    text: "iTechArt Group",
+    imageUrl: "/uploads/works_sprite.webp",
+    spritePosition: [2, 1],
+    spriteScale: [3, 3],
+    className: null,
+  },
+  {
+    url: `https://jazzpixels.com/`,
+    text: "Jazz Pixels",
+    imageUrl: "/uploads/works_sprite.webp",
+    spritePosition: [0, 2],
+    spriteScale: [3, 3],
+    className: null,
+  },
+];
 
-export const landingClients = [
+export const socialLinks = [
   {
-    url: "https://www.shmat.art",
-    text: "SHMAT.ART",
+    url: `https://www.linkedin.com/in/dmitry-shamak-0b3b5486`,
+    name: "linkedin",
+    imageUrl: "/uploads/social_icons_sprite.webp",
+    spritePosition: [1, 0],
+    spriteScale: [4, 1],
+    className: null,
   },
   {
-    url: "https://www.shmat.art",
-    text: "IBA",
+    url: `https://dshamak.t.me`,
+    name: "telegram",
+    imageUrl: "/uploads/social_icons_sprite.webp",
+    spritePosition: [2, 0],
+    spriteScale: [4, 1],
+    className: null,
   },
   {
-    url: "https://www.shmat.art",
-    text: "EPAM",
-  },
-  {
-    url: "https://www.shmat.art",
-    text: "iTechArt",
-  },
-  {
-    url: "https://www.shmat.art",
-    text: "Klika Tech",
-  },
-  {
-    url: "https://www.shmat.art",
-    text: "Amazone",
-  },
-  {
-    url: "https://www.shmat.art",
-    text: "Netflix",
+    url: `https://github.com/dshamak-dev`,
+    name: "github",
+    imageUrl: "/uploads/social_icons_sprite.webp",
+    spritePosition: [0, 0],
+    spriteScale: [4, 1],
+    className: null,
   },
 ];

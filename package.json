@@ -18,7 +18,7 @@
     "copy-files": "mkdir -p public && npm run copy-index && npm run copy-assets && npm run copy-uploads",
     "copy-index": "cp src/index.html public/",
     "copy-assets": "cp -R assets/* public/",
-    "copy-uploads": "npm run generate-webp && rm public/uploads/*.jpg && rm public/uploads/*.png",
+    "copy-uploads": "npm run generate-webp && rm -f public/uploads/*.jpg && rm -f public/uploads/*.png",
     "generate-webp": "simple-webp-converter"
   },
   "author": "",

@@ -1,39 +1,44 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
 
-const PORT = process.env.PORT || 88;
+const PORT = process.env.PORT || 80;
 const app = express();
 
-const PUBLIC_FOLDER = "public";
+const PUBLIC_FOLDER = 'public';
 
+//seconds * minutes * hours * days
 const cacheTime = 60 * 60 * 24 * 365;
 const robots = require('express-robots-txt');
 
-// Compress all HTTP responses
 app.use(compression());
 
 app.use(cors({ origin: ['http://localhost:3003'] }));
 
-const robotsFilePath = path.join(__dirname, PUBLIC_FOLDER, '/robots.txt');
+app.use(
+  express.static(PUBLIC_FOLDER, {
+    setHeaders: ((res, path, stat) => {
+      if (path.includes('.html')) {
+        res.set('Cache-Control', `no-cache`);
+        return;
+      }
+      res.set('Cache-Control', `max-age=${cacheTime}`);
+    })
+  })
+);
+
+const robotsFilePath = path.join(__dirname, '/robots.txt');
 app.use(robots(robotsFilePath));
-
-app.use(express.static(PUBLIC_FOLDER, {
-  maxAge: cacheTime,
-}));
-
-app.use(bodyParser.json());
 
 const rootFilePath = path.join(__dirname, `/${PUBLIC_FOLDER}/index.html`);
 
-app.get('/health', (req, res) => {
-  res.status(200).send(true);
-});
+// app.get('/sitemap.xml', (req, res) => {
+//   res.sendFile(path.join(__dirname, `sitemap.xml`));
+// });
 
 app.get('*', (req, res) => {
-  res.set("Cache-Control", `public, max-age=${cacheTime}`);
+  res.set('Cache-Control', `no-cache`);
   res.sendFile(rootFilePath);
 });
 
